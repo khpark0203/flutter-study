@@ -35,8 +35,11 @@ class MyApp extends StatefulWidget { // 위젯 부분, 스테이트를 다루는
   @override
   _MyAppState createState() => _MyAppState();
 }
+
 class _MyAppState extends State<MyApp> {
   int counter = 0; // Text UI에 표시될 값
+  var text_counter = "text";
+  final field = TextEditingController();
 
   void increaseCounter() { // 버튼을 누르면 counter 값을 증가시킴
     setState(() {
@@ -55,6 +58,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: "첫 플러터 앱",
       home: Scaffold(
+        resizeToAvoidBottomPadding: false,
         appBar: AppBar(
           title: Text("내 플러터 앱"),
         ),
@@ -65,6 +69,10 @@ class _MyAppState extends State<MyApp> {
               Text(
                 "$counter",
                 style: TextStyle(fontSize: 160.0),
+              ),
+              Text(
+                "$text_counter",
+                style: TextStyle(fontSize: 60.0),
               ),
               Row( // 가로로 위젯을 배치, 안에 버튼 2개가 들어가 있음. 
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly, // 위젯끼리 같은 공간만큼 띄움
@@ -92,11 +100,26 @@ class _MyAppState extends State<MyApp> {
                 ],
               ),
               TextField(
-                obscureText: true,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: "비밀번호"
+                  labelText: "비밀번호",
                 ),
+                controller: field,
+              ),
+              RaisedButton(
+                child: Text(
+                  "텍스트 복사!",
+                  style: TextStyle(color: Colors.blueAccent),
+                ),
+                onPressed: () {
+                  setState(() {
+                    if (field.text == "류가징") {
+                      text_counter = "정답입니다!!!!!!!!!!";
+                    } else {
+                      text_counter = field.text;
+                    }
+                  });
+                },
               ),
             ],
           ),
