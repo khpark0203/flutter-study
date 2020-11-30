@@ -1,2 +1,2 @@
-# flutter_study
+# Flutter study
 Flutter app study
